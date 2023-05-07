@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Banking System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Banking System!</h1>
+        <button onclick="window.location.href='view_customers.php'">View all Customers</button>
+    </div>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View all Customers</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View all Customers</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Balance</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Connect to the database
+                $conn = mysqli_connect("localhost", "username", "password", "banking_system");
+
+                // Query the database for all customers
+                $result = mysqli_query($conn, "SELECT * FROM customers");
+
+                // Loop through each row of the result and display it in a table row
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "<td>" . $row["balance"] . "</td>";
+                    echo "<td><button onclick=\"window.location.href='view_customer.php?id=" . $row["id"] . "'\">View Details</button></td>";
+                    echo "</tr>";
+                }
+
+                // Close the database connection
+                mysqli_close($conn);
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Customer</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View Customer</h1>
+        <?php
+        // Get the customer ID from the URL parameter
+        $id = $_GET["id"];
+
+        // Connect to the database
+        $conn = mysqli_connect("localhost", "username", "password", "banking_system");
+
+        // Query the database for the customer with the given ID
+        $result = mysqli_query($conn, "SELECT * FROM customers WHERE id=$id");
+
+        // Display the customer details in a table
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            echo "<table>";
+            echo "<tr><th>Name:</th><td>" . $row["name"] . "</td></tr>";
+            echo "<tr><th>Email:</th><td>" . $row["

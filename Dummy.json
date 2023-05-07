@@ -1,0 +1,41 @@
+   
+CREATE DATABASE banking_system;
+
+    
+
+
+
+CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    balance INT NOT NULL
+);
+
+    
+
+
+
+INSERT INTO customers (name, email, balance) VALUES
+('John Smith', 'john.smith@gmail.com', 500),
+('Jane Doe', 'jane.doe@yahoo.com', 1000),
+('Bob Johnson', 'bob.johnson@hotmail.com', 250),
+('Sarah Lee', 'sarah.lee@gmail.com', 750),
+('Mike Johnson', 'mike.johnson@yahoo.com', 1250),
+('Emily Smith', 'emily.smith@hotmail.com', 1500),
+('Tom Davis', 'tom.davis@gmail.com', 200),
+('Amy Lee', 'amy.lee@yahoo.com', 800),
+('Alex Brown', 'alex.brown@hotmail.com', 175),
+('Sara Johnson', 'sara.johnson@gmail.com', 225);
+
+  
+
+
+
+CREATE TABLE transfers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    amount INT NOT NULL,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP
+);
